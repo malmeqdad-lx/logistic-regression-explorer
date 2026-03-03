@@ -382,8 +382,7 @@ with tabs[0]:
 
     st.markdown("""
     ---
-    **From Binary → Multinomial:** When we have more than 2 classes (like our
-    Vanguard intents), we replace the single weight vector **w** with a weight
+    **From Binary → Multinomial:** When we have more than 2 classes (e.g. intent-based classification), we replace the single weight vector **w** with a weight
     matrix **W** (one row per class), and replace sigmoid with **softmax**.
     The rest of the tabs explore this multinomial case.
     """)
