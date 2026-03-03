@@ -28,33 +28,46 @@ st.set_page_config(
 # ─── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-    /* Clean typography */
+    /* ── Layout ── */
     .main .block-container { max-width: 1200px; padding-top: 1.5rem; }
-    h1 { color: #1a1a2e; }
-    h2 { color: #16213e; border-bottom: 2px solid #e94560; padding-bottom: 0.3rem; }
-    h3 { color: #0f3460; }
+
+    /* ── Headings: inherit theme text color, accent border on h2 ── */
+    h2 { border-bottom: 2px solid #e94560; padding-bottom: 0.3rem; }
+
+    /* ── Tabs: theme-aware backgrounds ── */
     .stTabs [data-baseweb="tab-list"] { gap: 4px; }
     .stTabs [data-baseweb="tab"] {
-        background-color: #f0f2f6; border-radius: 8px 8px 0 0;
+        border-radius: 8px 8px 0 0;
         padding: 8px 16px; font-weight: 500;
     }
     .stTabs [aria-selected="true"] {
-        background-color: #e94560; color: white;
+        background-color: #e94560 !important; color: white !important;
     }
+
+    /* ── Callout boxes: use semi-transparent colors that adapt to any background ── */
     .section-ref {
-        background: #eef2ff; border-left: 3px solid #6366f1;
+        background: rgba(99, 102, 241, 0.1);
+        border-left: 3px solid #6366f1;
         padding: 8px 12px; border-radius: 0 6px 6px 0;
-        font-size: 0.85em; color: #4338ca; margin-bottom: 1rem;
+        font-size: 0.85em; color: #818cf8; margin-bottom: 1rem;
     }
     .math-box {
-        background: #fefce8; border: 1px solid #fbbf24;
+        background: rgba(251, 191, 36, 0.1);
+        border: 1px solid rgba(251, 191, 36, 0.5);
         padding: 12px; border-radius: 8px; margin: 8px 0;
     }
     .insight-box {
-        background: #f0fdf4; border: 1px solid #22c55e;
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.5);
         padding: 12px; border-radius: 8px; margin: 8px 0;
     }
+
     div[data-testid="stMetricValue"] { font-size: 1.4rem; }
+
+    /* ── Light mode overrides ── */
+    @media (prefers-color-scheme: light) {
+        .section-ref { color: #4338ca; background: rgba(99, 102, 241, 0.08); }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -369,7 +382,8 @@ with tabs[0]:
 
     st.markdown("""
     ---
-    **From Binary → Multinomial:** When we have more than 2 classes (for example intent-based classification), we replace the single weight vector **w** with a weight
+    **From Binary → Multinomial:** When we have more than 2 classes (like our
+    Vanguard intents), we replace the single weight vector **w** with a weight
     matrix **W** (one row per class), and replace sigmoid with **softmax**.
     The rest of the tabs explore this multinomial case.
     """)
@@ -1045,6 +1059,7 @@ with tabs[5]:
 # ─── Footer ────────────────────────────────────────────────────────────────────
 st.divider()
 st.caption(
-    "Built for learning · Based on Jurafsky & Martin, *Speech and Language Processing*, "
-    "Chapter 4 (Sections 4.1–4.8) · All algorithms implemented from scratch in NumPy"
+    "Created by **Mohammed** · Built for learning · Based on Jurafsky & Martin, "
+    "*Speech and Language Processing*, Chapter 4 (Sections 4.1–4.8) · "
+    "All algorithms implemented from scratch in NumPy"
 )
