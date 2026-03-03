@@ -387,6 +387,39 @@ with tabs[0]:
     The rest of the tabs explore this multinomial case.
     """)
 
+    st.markdown("#### What is Softmax?")
+    st.markdown("""
+    The **softmax** function is the multinomial generalization of the sigmoid. Where
+    sigmoid maps a single score to a probability between 0 and 1, softmax takes a
+    vector of K arbitrary scores (the **logits**) and maps them to a probability
+    distribution — K values that are each in [0, 1] and that sum to 1.
+    """)
+    st.latex(r"\text{softmax}(z_i) = \frac{\exp(z_i)}{\sum_{j=1}^{K} \exp(z_j)} \qquad 1 \leq i \leq K")
+    st.markdown("""
+    For example, given a vector of logits **z** = [0.6, 1.1, −1.5, 1.2, 3.2, −1.1],
+    softmax produces:
+    """)
+    # Live computed example from J&M §4.7.1
+    z_example = np.array([0.6, 1.1, -1.5, 1.2, 3.2, -1.1])
+    sm_example = softmax(z_example)
+    st.code(f"z       = {z_example.tolist()}\nsoftmax = {np.round(sm_example, 2).tolist()}", language=None)
+    st.markdown("""
+    Notice how softmax *amplifies* differences — the largest logit (3.2) dominates
+    with 74% probability, while smaller values get squashed toward 0. This is the
+    key property: softmax is a "soft" version of argmax, producing a probability
+    distribution that concentrates mass on the winning class.
+
+    In multinomial logistic regression, the logits come from **z = Wx + b** — one
+    score per class — and softmax converts them into P(class | x).
+    """)
+    st.markdown("""
+    <div class="math-box">
+    <strong>📐 Sigmoid vs. Softmax:</strong> Sigmoid handles 2 classes with a single output
+    P(y=1|x), since P(y=0|x) = 1 − P(y=1|x). Softmax handles K classes by
+    outputting a full probability vector. When K = 2, softmax reduces to sigmoid.
+    </div>
+    """, unsafe_allow_html=True)
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 2: Setup Intents
